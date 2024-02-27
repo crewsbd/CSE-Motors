@@ -83,6 +83,11 @@ h1, h2, h3, h4 {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.498);
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
 .siteName a {
   font-family: var(--decorative-font);
   font-size: 2rem;
@@ -207,4 +212,19 @@ ul.open {
     border-radius: .5rem;
     /* padding: .5rem; */
   }
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  section#reviews {
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+  section#upgrades {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+
 }
