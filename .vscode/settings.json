@@ -5,13 +5,13 @@
                 "ssl": true
             },
             "previewLimit": 50,
-            "server": "dpg-cng39iv109ks738lnnjg-a.oregon-postgres.render.com",
+            "server": "dpg-cnkh8gv109ks73d1s5pg-a.oregon-postgres.render.com",
             "port": 5432,
             "driver": "PostgreSQL",
-            "name": "CSE340 Database",
-            "database": "cse340_iy52",
+            "name": "CSE-Motors-DB",
+            "database": "csemotorsdb_8gig",
             "username": "cse340",
-            "password": "Nnskq4zhZ41jCZtzXlrk0irFTIXvCOs1"
+            "password": "ZNwM5EIxDadquNLudjAKjLiDR4igrgRZ"
         }
     ]
 }
