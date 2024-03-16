@@ -58,6 +58,50 @@ Util.buildClassificationGrid = async function(data){
     return grid
   }
 
+
+/**
+ * Build a single listing element from data
+ */
+Util.buildItemListing = async function(data) {
+  let listingHTML = '';
+  console.dir({data});
+  if(data) {
+    listingHTML = `
+      <section class="car-listing">
+        <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">
+        <div class="car-information">
+          <div>
+            <h2>${data.inv_year} ${data.inv_make} ${data.inv_model}</h2>
+          </div>
+          <div>
+            ${Number.parseFloat(data.inv_price).toLocaleString('en-US', { style: 'currency', currency: 'USD'})}
+          </div>
+          <div class="description">
+            <p>
+              ${data.inv_description}
+            </p>
+            <dl>
+              <dt>MILEAGE</dt>
+              <dd>${data.inv_miles.toLocaleString('en-US', { style: 'decimal'})}</dd>
+              <dt>COLOR</dt>
+              <dd>${data.inv_color}</dd>
+              <dt>CLASS</dt>
+              <dd>${data.classification_name}</dd>
+            </dl>
+          </div>
+
+        </div>
+      </section>
+    `;
+    // listingHTML += '<img src="/images/notexist.jpg">'; // Introduce 404 error
+  } else {
+    listingHTML = `
+      <p>Sorry, not matching vehicles could be found.</p>
+    `
+  }
+  return listingHTML;
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

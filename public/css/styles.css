@@ -241,6 +241,7 @@ ul#inv-display > li div.namePrice {
   text-shadow: 0 0 25px var(--secondary-bg), 0 0 3px black;
 }
 
+  /* Error page styles */
 div.error-display {
   display: flex;
   flex-direction: column;
@@ -250,6 +251,31 @@ div.error-display img {
   align-self: center;
 }
 
+/* Car list styles section */
+section.car-listing {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+section.car-listing img {
+  width: 100%;
+  border-bottom: 10px solid var(--secondary-bg);
+}
+section.car-listing div.car-information {
+  grid-row: 2/4;
+  grid-column: 1/2;
+  background-color: #fff6;
+  text-shadow: 0 0 7px white;
+  backdrop-filter: blur(2px);
+  padding: 1rem;
+}
+section.car-listing dl dt {
+  font-size: 1.1rem;
+  font-weight: bolder;
+}
 
 @media screen and (min-width: 700px) {
   body {
@@ -283,6 +309,17 @@ div.error-display img {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-
+  section.car-listing{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  section.car-listing img {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+  section.car-listing div.car-information {
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
 
 }
