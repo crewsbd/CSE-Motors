@@ -204,6 +204,79 @@ ul.open {
   gap: 1rem;
 }
 
+ul#inv-display {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+ul#inv-display > li {
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: var(--secondary-bg);
+  color: var(--secondary-fg);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.173);
+}
+ul#inv-display > li a {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  display: flex;
+}
+ul#inv-display > li img {
+  width: 100%;
+}
+ul#inv-display > li div.namePrice {
+  padding: 1rem;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  text-shadow: 0 0 25px var(--secondary-bg), 0 0 3px black;
+}
+
+  /* Error page styles */
+div.error-display {
+  display: flex;
+  flex-direction: column;
+}
+div.error-display img {
+  width: 50%;
+  align-self: center;
+}
+
+/* Car list styles section */
+section.car-listing {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+section.car-listing img {
+  width: 100%;
+  border-bottom: 10px solid var(--secondary-bg);
+}
+section.car-listing div.car-information {
+  grid-row: 2/4;
+  grid-column: 1/2;
+  background-color: #fff6;
+  text-shadow: 0 0 7px white;
+  backdrop-filter: blur(2px);
+  padding: 1rem;
+}
+section.car-listing dl dt {
+  font-size: 1.1rem;
+  font-weight: bolder;
+}
+
 @media screen and (min-width: 700px) {
   body {
     display: flex;
@@ -232,6 +305,21 @@ ul.open {
     grid-column: 1/2;
     grid-row: 1/2;
   }
-
+  ul#inv-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  section.car-listing{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  section.car-listing img {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+  section.car-listing div.car-information {
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
 
 }
