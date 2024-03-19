@@ -1,7 +1,7 @@
 <h1><%- title %></h1>
 <%- messages() %>
 
-<form class="login-form">
+<form class="login-form" action="/account/register" method="post">
     <label>First name<input type="text" name="account_firstname" required autocomplete="given-name"></label>
     <label>Last name<input type="text" name="account_lastname" required autocomplete="family-name"></label>
     <label>Email address<input type="email" name="account_email" required autocomplete="email username"></label>

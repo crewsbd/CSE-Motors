@@ -2,12 +2,14 @@
  * This server.js file is the primary file of the
  * application. It is used to control the project.
  *******************************************/
+
 /* ***********************
  * Require Statements
  *************************/
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
+const bodyParser = require("body-parser");
 
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
@@ -43,6 +45,11 @@ app.use(function (req, res, next) {
   res.locals.messages = require("express-messages")(req, res);
   next();
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ // for parsing application/x-www-form-urlencoded
+  extended: true
+}));
 
 
 /* ***********************
