@@ -305,12 +305,17 @@ form.login-form label {
   display: flex;
   flex-direction: column;
   gap: .5rem;
+  position: relative;
 }
 form.login-form input {
   padding: .5rem;
   border: none;
 }
+form.login-form input:invalid {
+  border-right: 5px solid red;
+}
 form.login-form input[type="submit"] {
+  font-size: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
   width: fit-content;
@@ -319,7 +324,24 @@ form.login-form input[type="submit"] {
   color: white;
   border: none;
   border-radius: .5rem;
-
+}
+form.login-form button.reveal-button {
+  color: transparent; /* To make wave happy */
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  background-color: transparent;
+  background-image: url("/images/site/eye_open.svg");
+  background-size: contain;
+  height: 2rem;
+  width: 2rem;
+  border: 0;
+}
+form.login-form button.reveal-button.active {
+  background-image: url("/images/site/eye_closed.svg");
+}
+.fine-print {
+  font-size: .75em;
 }
 
 

@@ -1,0 +1,26 @@
+<h1><%- title %></h1>
+<%- messages() %>
+
+<form class="login-form">
+    <label>First name<input type="text" name="account_firstname" required autocomplete="given-name"></label>
+    <label>Last name<input type="text" name="account_lastname" required autocomplete="family-name"></label>
+    <label>Email address<input type="email" name="account_email" required autocomplete="email username"></label>
+    <label>Password<input type="password" name="account_password" id="password" required autocomplete="new-password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{12,}$"><button class="reveal-button active" id="passwordHide" type="button">hide password</button></label>
+    <span class="fine-print">Password must be 12 characters or longer, contain 1 capital letter, 1 number and 1 special character</span>
+    <input type="submit" value="REGISTER">
+</form>
+<!-- Script to handle hiding and revealing password field -->
+<script>
+    const passwordInput = document.querySelector("#password");
+    const passwordHide = document.querySelector("#passwordHide");
+    passwordHide.addEventListener("click", () => {
+        if(passwordInput.getAttribute("type") == "password" ) {
+            passwordInput.setAttribute("type", "text");
+            passwordHide.classList.remove("active");
+        }
+        else {
+            passwordInput.setAttribute("type", "password");
+            passwordHide.classList.add("active");
+        }
+    })
+</script>
