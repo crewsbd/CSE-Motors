@@ -12,6 +12,7 @@ const session = require("express-session");
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute.js");
+const accountRoute = require('./routes/accountRoute.js');
 const intentionalErrorRoute = require("./routes/intentionalErrorRoute.js");
 const utilities = require("./utilities/index.js");
 const pool = require("./database");
@@ -60,6 +61,8 @@ app.use(static);
 app.get("/", utilities.handleErrors(baseController.buildHome));
 // Inventory routes
 app.use("/inv", inventoryRoute);
+// Account routes
+app.use("/account", accountRoute);
 // Intentional error route. Used for testing
 app.use("/ierror", intentionalErrorRoute);
 
