@@ -277,6 +277,19 @@ section.car-listing dl dt {
   font-weight: bolder;
 }
 
+/* Week 4 */
+.notice {
+  color: rgb(184, 194, 0);
+  list-style: none;
+  background-color: rgba(0, 0, 0, 0.747);
+  padding: .5rem;
+  border-radius: 3px;
+}
+.notice li::before {
+  content: "> ";
+}
+
+
 @media screen and (min-width: 700px) {
   body {
     display: flex;
