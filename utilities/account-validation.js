@@ -5,7 +5,7 @@ const validate = {};
 /* **********************************
  *  egistration Data Validation Rules
  * ********************************* */
-validate.registationRules = () => {
+validate.registrationRules = () => {
     return [
         // firstname is required and must be string
         body("account_firstname")
