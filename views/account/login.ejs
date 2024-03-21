@@ -1,10 +1,31 @@
 <h1><%- title %></h1>
 <%- messages() %>
-<form class="login-form">
-    <label>Email<input type="email" name="account_email" required autocomplete="email username"></label>
-    <label>Password<input type="password" name="account_password" required autocomplete="current-password"></label>
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+<form class="login-form" action="/account/login" method="post">
+    <label>Email<input type="email" name="account_email" required autocomplete="email username" value="<%= locals.account_email %>"></label>
+    <label>Password<input type="password" name="account_password" id="password" required autocomplete="current-password"><button class="reveal-button active" id="passwordHide" type="button">hide password</button></label>
     <input type="submit" value="LOGIN">
 </form>
 <div>
     <span>No account? <a href="/account/registration">Sign up</a></span>
 </div>
+<script>
+    const passwordInput = document.querySelector("#password");
+    const passwordHide = document.querySelector("#passwordHide");
+    passwordHide.addEventListener("click", () => {
+        if(passwordInput.getAttribute("type") == "password" ) {
+            passwordInput.setAttribute("type", "text");
+            passwordHide.classList.remove("active");
+        }
+        else {
+            passwordInput.setAttribute("type", "password");
+            passwordHide.classList.add("active");
+        }
+    })
+</script>

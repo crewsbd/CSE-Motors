@@ -10,6 +10,7 @@ async function buildLogin(req, res, next) {
     // req.flash("notice", "This is a flash message.!!!@2")
     res.render("account/login", {
       title: "Login",
+      errors: null,
       nav,
     })
   }
