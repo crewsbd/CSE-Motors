@@ -28,7 +28,7 @@ validate.checkClassificationData = async (req, res, next) => {
   errors = validationResult(req);
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
-    res.render("inventory/addClassification", {
+    res.render("inventory/addClassification", { // Try again
       errors,
       title: "Add Classification",
       nav,
@@ -146,7 +146,7 @@ validate.checkInventoryData = async (req, res, next) => {
       classification_id
     );
     let nav = await utilities.getNav();
-    res.render("inventory/addInventory", {
+    res.render("inventory/addInventory", { // Try again
       errors,
       title: "Add Inventory",
       nav,

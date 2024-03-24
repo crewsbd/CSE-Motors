@@ -33,6 +33,9 @@ async function getInventoryByClassificationId(classification_id) {
         WHERE i.classification_id = $1`,
         [classification_id]
       )
+      console.log("RETURNING ROWS!!!!!!!!")
+      console.dir(data);
+      console.dir(data.rows);
       return data.rows
     } catch (error) {
       console.error("getclassificationsbyid error " + error)
@@ -57,7 +60,9 @@ async function getInventoryByClassificationId(classification_id) {
     }
   }
 
-  /** Add a single inventory item  */
+  /*******************************
+   * Add a single inventory item
+   *******************************/
   async function addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) {
     const sql = `INSERT INTO public.inventory 
     ( inv_make,
