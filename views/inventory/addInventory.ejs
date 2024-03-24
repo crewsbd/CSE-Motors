@@ -13,7 +13,7 @@
     <label>Model<input type="text" value="<%- locals.inv_model %>" placeholder="Mustang" name="inv_model" minlength="2" maxlength="50"><span class="fine-print">Required.</span></label>
     <label>Year<input type="number" value="<%- locals.inv_year %>" placeholder="2001" name="inv_year" min="1900" max="2030"><span class="fine-print">Required. 1900-2030.</span></label>
     <label>Description
-        <textarea placeholder="Fancy and red." name="inv_description"minlength="2" maxlength="100" rows="5"><%- locals.inv_description %></textarea><span class="fine-print">Required. 100 characters max.</span>
+        <textarea placeholder="Fancy and red." name="inv_description" minlength="2" maxlength="100" rows="5"><%- locals.inv_description %></textarea><span class="fine-print">Required. 100 characters max.</span>
     </label>
     <label>Image<input type="text" value="/images/vehicles/no-image.png" placeholder="red_mustang.jpg" name="inv_image"><span class="fine-print">Required.</span></label>
     <label>Thumbnail<input type="text" value="/images/vehicles/no-image-tn.png" placeholder="litle_red_mustang.jpg" name="inv_thumbnail"><span class="fine-print">Required.</span></label>
@@ -22,5 +22,6 @@
     <label>Color<input type="text" value="<%- locals.inv_color %>" placeholder="Red" name="inv_color"><span class="fine-print">Required.</span></label>
     <label>Classification
         <%- classifications %><span class="fine-print">Required.</span>
+    </label>
     <input type="submit" value="ADD">
   </form>
