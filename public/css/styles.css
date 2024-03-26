@@ -43,20 +43,37 @@ nav {
   width: 100%;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.703);
 }
+
+nav ul {
+  /* Handle this later with a burger */
+  display: flex;
+  flex-wrap: wrap;
+}
+main {
+  display: flex;
+  flex-direction: column;
+}
 footer {
   overflow: hidden;
 }
 
-a {
+nav a {
   display: inline-block;
   color: unset;
   filter: brightness(1.1);
   text-decoration: none;
   transition: scale .5s;
 }
-a:hover {
+nav a:hover {
   transform: scale(1.1);
   transition: transform .5s;
+}
+
+a {
+  color: unset;
+}
+a:hover {
+  filter: brightness(1.4);
 }
 
 
@@ -276,6 +293,81 @@ section.car-listing dl dt {
   font-size: 1.1rem;
   font-weight: bolder;
 }
+
+/* Week 4 */
+.notice {
+  color: rgb(184, 194, 0);
+  list-style: none;
+  background-color: rgba(0, 0, 0, 0.747);
+  padding: .5rem;
+  border-radius: 3px;
+}
+.notice li::before {
+  content: "> ";
+}
+
+/* Login form  */
+form.login-form {
+  background-color: var(--secondary-bg);
+  color: var(--secondary-fg);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: .5rem;
+  box-shadow: 0 .2rem .5rem rgba(0, 0, 0, 0.298);
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 500px;
+  align-self: center;
+}
+form.login-form label {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  position: relative;
+}
+form.login-form input, form.login-form select {
+  padding: .5rem;
+  border: none;
+}
+form.login-form input::placeholder, form.login-form select::placeholder, form.login-form textarea::placeholder {
+  color: rgba(0, 0, 0, 0.27)
+}
+form.login-form input:invalid {
+  border-right: 5px solid red;
+}
+form.login-form input[type="submit"] {
+  font-size: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  width: fit-content;
+  align-self: center;
+  background-color: var(--pop);
+  color: white;
+  border: none;
+  border-radius: .5rem;
+  box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.368);
+}
+form.login-form button.reveal-button {
+  color: transparent; /* To make wave happy */
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  background-color: transparent;
+  background-image: url("/images/site/eye_open.svg");
+  background-size: contain;
+  height: 2rem;
+  width: 2rem;
+  border: 0;
+}
+form.login-form button.reveal-button.active {
+  background-image: url("/images/site/eye_closed.svg");
+}
+.fine-print {
+  font-size: .75em;
+}
+
 
 @media screen and (min-width: 700px) {
   body {

@@ -1,0 +1,18 @@
+<h1><%- title %></h1>
+<%- messages() %>
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+<ul>
+    <li>
+        <a href="/inv/add-classification">Add New Classification</a>
+    </li>
+    <li>
+        <a href="/inv/add-inventory">Add New Vehicle</a>
+    </li>
+</ul>
