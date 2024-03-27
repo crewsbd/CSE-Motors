@@ -7,7 +7,7 @@
   <%  }) %>
    </ul>
   <% } %>
-<form class="login-form" action="/account/login" method="post">
+<form class="login-form" id="loginForm" action="/account/login" method="post">
     <label>Email<input type="email" name="account_email" required autocomplete="email username" value="<%= locals.account_email %>"></label>
     <label>Password<input type="password" name="account_password" id="password" required autocomplete="current-password"><button class="reveal-button active" id="passwordHide" type="button">hide password</button></label>
     <input type="submit" value="LOGIN">
