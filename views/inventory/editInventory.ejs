@@ -8,7 +8,7 @@
    </ul>
   <% } %>
 
-  <form class="login-form" action="/inv/update" method="post">
+  <form class="login-form" id="updateForm" action="/inv/update" method="post">
     <label>Make<input type="text" value="<%- locals.inv_make %>" placeholder="Ford" name="inv_make" minlength="2" maxlength="50"><span class="fine-print">Required.</span></label>
     <label>Model<input type="text" value="<%- locals.inv_model %>" placeholder="Mustang" name="inv_model" minlength="2" maxlength="50"><span class="fine-print">Required.</span></label>
     <label>Year<input type="number" value="<%- locals.inv_year %>" placeholder="2001" name="inv_year" min="1900" max="2030"><span class="fine-print">Required. 1900-2030.</span></label>
@@ -23,5 +23,9 @@
     <label>Classification
         <%- classifications %><span class="fine-print">Required.</span>
     </label>
-    <input type="submit" name="submit" value="Update Vehicle">
+    <input type="submit" name="submit" value="Update Vehicle" disabled>
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>> 
+    <script src="/js/inv-update.js"></script> 
   </form>
