@@ -5,6 +5,7 @@ const invController = require("../controllers/invController");
 const utilities = require("../utilities");
 const invValidate = require("../utilities/inventory-validation");
 
+// Misc. routes
 // Route to build inventory by classification view
 router.get("/", utilities.handleErrors(invController.buildManagementView));
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
@@ -18,14 +19,15 @@ router.post("/add-classification", invValidate.classificationRules(), invValidat
 router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory));
 router.post("/add-inventory", invValidate.inventoryRules(), invValidate.checkInventoryData, utilities.handleErrors(invController.addInventory));
 
-// AJAX inventory api call route
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
-
-// Build edit inventory view
+// Build edit/update inventory views
 router.get("/edit/:inventoryId", utilities.handleErrors(invController.buildEditInventory));
-
-//  Update vehicle information route
 router.post("/update/", invValidate.inventoryRules(), invValidate.checkUpdateData, utilities.handleErrors(invController.updateInventory));
 
+// Delete vehicle information routes
+router.get("/delete/:inventoryId", utilities.handleErrors(invController.buildDeleteInventory));
+router.post("/delete/", utilities.handleErrors(invController.deleteInventory));  // Don't need validation
+
+// AJAX inventory api call route
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 module.exports = router;

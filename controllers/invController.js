@@ -162,7 +162,7 @@ invCont.addInventory = async function (req, res, next) {
     classification_id,
   } = req.body;
 
-  const response = invModel.addInventory(
+  const response = await invModel.addInventory(
     inv_make,
     inv_model,
     inv_year,
@@ -180,9 +180,11 @@ invCont.addInventory = async function (req, res, next) {
       "notice",
       `The ${inv_year} ${inv_make} ${inv_model} successfully added.`
     );
+    const classificationSelect = await utilities.buildClassificationList(classification_id);
     res.render("inventory/management", {
       title: "Vehicle Management",
       nav,
+      classificationSelect,
       errors: null,
     });
   } else {
@@ -222,8 +224,7 @@ invCont.buildEditInventory = async function (req, res, next) {
   const nav = await utilities.getNav();
 
   const inventoryData = (
-    await invModel.getInventoryByInventoryId(inventory_id)
-  )[0]; // Change this function to return the first item
+    await invModel.getInventoryByInventoryId(inventory_id))[0]; // Change this function to return the first item
   const name = `${inventoryData.inv_make} ${inventoryData.inv_model}`;
 
   let classifications = await utilities.buildClassificationList();
@@ -310,6 +311,78 @@ invCont.updateInventory = async function (req, res, next) {
       inv_miles,
       inv_color,
       classification_id,
+    });
+  }
+};
+
+/**
+ * Build the delete inventory view
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @param {import('express').NextFunction} next
+ */
+invCont.buildDeleteInventory = async function (req, res, next) {
+  const inventory_id = parseInt(req.params.inventoryId);
+  const nav = await utilities.getNav();
+
+  const inventoryData = (
+    await invModel.getInventoryByInventoryId(inventory_id))[0]; // Change this function to return the first item
+  const name = `${inventoryData.inv_make} ${inventoryData.inv_model}`;
+
+  res.render("inventory/delete-confirm", {
+    title: "Delete " + name,
+    errors: null,
+    nav,
+    inv_id: inventoryData.inv_id,
+    inv_make: inventoryData.inv_make,
+    inv_model: inventoryData.inv_model,
+    inv_year: inventoryData.inv_year,
+    inv_price: inventoryData.inv_price,
+  });
+};
+
+
+
+
+/**
+ * Handle post request to delete a vehicle from the inventory along with redirects
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @param {import('express').NextFunction} next
+ */
+invCont.deleteInventory = async function (req, res, next) {
+  const nav = await utilities.getNav();
+  const inventory_id = parseInt(req.body.inv_id);
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_price,
+  } = req.body;
+
+  const queryResponse = await invModel.deleteInventory(inventory_id);
+  const itemName = `${inv_make} ${inv_model}`;
+
+  if (queryResponse) {
+    // const itemName = queryResponse.inv_make + " " + queryResponse.inv_model;
+    req.flash("notice", `The ${itemName} was successfully deleted.`);
+    res.redirect("/inv/");
+  } else {
+    // const classifications = await utilities.buildClassificationList(
+    //   classification_id
+    // );
+
+    req.flash("notice", "Sorry, the update failed.");
+    res.status(501).render("inventory/deleteInventory", {
+      title: "Delete " + itemName,
+      nav,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_price,
     });
   }
 };

@@ -124,7 +124,7 @@ Util.buildItemListing = async function (data) {
     // listingHTML += '<img src="/images/notexist.jpg">'; // Introduce 404 error
   } else {
     listingHTML = `
-      <p>Sorry, not matching vehicles could be found.</p>
+      <p>Sorry, no matching vehicles could be found.</p>
     `;
   }
   return listingHTML;
