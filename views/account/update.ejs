@@ -8,14 +8,25 @@
    </ul>
   <% } %>
 
-<form class="input-box" action="/account/register" method="post">
+<form class="input-box" action="/account/update" method="post">
     <label>First name<input type="text" name="account_firstname" required autocomplete="given-name" value="<%= locals.account_firstname %>"></label>
-    <label>Last name<input type="text" name="account_lastname" required autocomplete="family-name" value="<%= locals.account_last %>"></label>
+    <label>Last name<input type="text" name="account_lastname" required autocomplete="family-name" value="<%= locals.account_lastname %>"></label>
     <label>Email address<input type="email" name="account_email" required autocomplete="email username" value="<%= locals.account_email %>"></label>
-    <label>Password<input type="password" name="account_password" id="password" required autocomplete="new-password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{12,}$"><button class="reveal-button active" id="passwordHide" type="button">hide password</button></label>
-    <span class="fine-print">Password must be 12 characters or longer, contain 1 capital letter, 1 number and 1 special character</span>
-    <input type="submit" value="REGISTER">
+    
+    <input type="submit" value="UPDATE">
+    <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+    <input type="hidden" name="old_email" value="<%= locals.account_email %>"> <%# To exclude from existing email search %>
 </form>
+
+<form class="input-box" action="/account/update-password" method="post">
+    <label>Password<input type="password" name="account_password" id="password" required autocomplete="new-password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{12,}$"><button class="reveal-button active" id="passwordHide" type="button">hide password</button></label>
+    <span class="fine-print">Password must be 12 characters or longer, contain 1 capital letter, 1 number and 1 special character. This will change your current password.</span>
+    <input type="submit" value="CHANGE PASSWORD">
+    <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+</form>
+
+
+
 <!-- Script to handle hiding and revealing password field -->
 <script>
     const passwordInput = document.querySelector("#password");

@@ -227,7 +227,7 @@ invCont.buildEditInventory = async function (req, res, next) {
     await invModel.getInventoryByInventoryId(inventory_id))[0]; // Change this function to return the first item
   const name = `${inventoryData.inv_make} ${inventoryData.inv_model}`;
 
-  let classifications = await utilities.buildClassificationList();
+  let classifications = await utilities.buildClassificationList(inventoryData.classification_id);
 
   res.render("inventory/editInventory", {
     title: "Edit " + name,
@@ -244,7 +244,7 @@ invCont.buildEditInventory = async function (req, res, next) {
     inv_price: inventoryData.inv_price,
     inv_miles: inventoryData.inv_miles,
     inv_color: inventoryData.inv_color,
-    classification_id: inventoryData.classification_id_id,
+    classification_id: inventoryData.classification_id,
   });
 };
 
@@ -299,7 +299,7 @@ invCont.updateInventory = async function (req, res, next) {
       title: "Edit " + itemName,
       nav,
       errors: null,
-      classifications: classifications,
+      classifications,
       inv_id,
       inv_make,
       inv_model,
