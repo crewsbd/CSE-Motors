@@ -5,18 +5,6 @@ require("dotenv").config();
 const utilities = require("../utilities");
 const accountModel = require("../models/account-model");
 
-/* ****************************************
- *  Deliver login view
- * *************************************** */
-async function buildLogin(req, res, next) {
-  let nav = await utilities.getNav();
-  // req.flash("notice", "This is a flash message.!!!@2")
-  res.render("account/login", {
-    title: "Login",
-    errors: null,
-    nav,
-  });
-}
 
 /* ****************************************
  *  Deliver registration view
@@ -87,7 +75,20 @@ async function registerAccount(req, res) {
 }
 
 /* ****************************************
- *  Process login request
+ *  Deliver login view
+ * *************************************** */
+async function buildLogin(req, res, next) {
+  let nav = await utilities.getNav();
+  // req.flash("notice", "This is a flash message.!!!@2")
+  res.render("account/login", {
+    title: "Login",
+    errors: null,
+    nav,
+  });
+}
+
+/* ****************************************
+ *  Process login post request
  * ************************************ */
 async function accountLogin(req, res) {
   let nav = await utilities.getNav();
@@ -108,34 +109,20 @@ async function accountLogin(req, res) {
       delete accountData.account_password;
       
       utilities.updateCookie(accountData, res);
-      
-
-      // const accessToken = jwt.sign(
-      //   accountData,
-      //   process.env.ACCESS_TOKEN_SECRET,
-      //   { expiresIn: 3600 }
-      // );
-      // if (process.env.NODE_ENV === "development") {
-      //   res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
-      // } else {
-      //   res.cookie("jwt", accessToken, {
-      //     httpOnly: true,
-      //     secure: true,
-      //     maxAge: 3600 * 1000,
-      //   });
-      // }
+     
       return res.redirect("/account/");
     } // Need to have a wrong password option
-    // else {
-    //   res.redirect("/account/");
-    // }
+    else {
+      req.flash("notice", "Please check your credentials and try again."); // Login was hanging with bad password but correct id
+      res.redirect("/account/");
+    }
   } catch (error) {
     return new Error("Access Forbidden");
   }
 }
 
 /* ****************************************
- *  Process login request
+ *  Process account management get request
  * ************************************ */
 async function buildAccountManagementView(req, res) {
   let nav = await utilities.getNav();
@@ -145,7 +132,6 @@ async function buildAccountManagementView(req, res) {
     errors: null,
   });
   return; 
-
 }
 
 /* ****************************************
@@ -161,16 +147,8 @@ async function accountLogout(req, res) {
 
 }
 
-
-
-
-
-
-
-//TODO: THIS STUFF
-
 /* ****************************************
- *  Deliver account update view
+ *  Deliver account update view get
  * *************************************** */
 async function buildUpdate(req, res, next) {
   let nav = await utilities.getNav();
@@ -189,7 +167,7 @@ async function buildUpdate(req, res, next) {
 }
 
 /* ****************************************
- *  Process account update
+ *  Process account update post
  * *************************************** */
 async function updateAccount(req, res) {
   let nav = await utilities.getNav();
@@ -243,7 +221,7 @@ async function updateAccount(req, res) {
 
 
 /* ****************************************
- *  Process account password update
+ *  Process account password update post
  * *************************************** */
 async function updatePassword(req, res) {
   let nav = await utilities.getNav();

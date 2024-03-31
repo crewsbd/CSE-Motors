@@ -163,7 +163,7 @@ validate.checkUpdateData = async (req, res, next) => {
   errors = validationResult(req);
   if (!errors.isEmpty()) {
       let nav = await utilities.getNav();
-      res.render("account/update", {
+      res.render("account/update/", {
           errors,
           title: "Update",
           nav,
@@ -181,7 +181,7 @@ validate.checkUpdateData = async (req, res, next) => {
  * Check data and return errors or continue to update password
  * ***************************** */
 validate.checkUpdatePasswordData = async (req, res, next) => {
-  // const { account_firstname, account_lastname, account_email } = req.body;
+  const { account_id, account_firstname, account_lastname, account_email } = req.body;
   let errors = [];
   errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -190,9 +190,10 @@ validate.checkUpdatePasswordData = async (req, res, next) => {
           errors,
           title: "Update",
           nav,
-          // account_firstname,
-          // account_lastname,
-          // account_email,
+          account_id,
+          account_firstname,
+          account_lastname,
+          account_email,
       });
       return;
   }
