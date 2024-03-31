@@ -11,7 +11,6 @@ const Util = {};
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications();
   let list = "<ul>";
-  console.log(data);
   list += '<li><a href="/" title="Home page">Home</a></li>';
   data.rows.forEach((row) => {
     list += "<li>";
@@ -152,7 +151,6 @@ Util.buildClassificationList = async function (classification_id = null) {
     classificationList += ">" + row.classification_name + "</option>";
   });
   classificationList += "</select>";
-  console.log(classificationList);
   return classificationList;
 };
 
@@ -216,7 +214,6 @@ Util.updateCookie = (accountData, res) => {
  *  Check Login
  * ************************************ */
 Util.checkLogin = (req, res, next) => {
-  console.log("LOGGED IN? " + res.locals.loggedin);
   if (res.locals.loggedin) {
     next();
   } else {
@@ -243,14 +240,13 @@ Util.checkAuthorizationManager = (req, res, next) => {
           next();
         }
         else {
-          console.log("GET OUT OF HERE!!!")
           req.flash("notice", "You are not authorized to modify inventory.");
           return res.redirect("/account/login");
         }
       }
     );
   } else {
-    console.log("NO TOKEN!!!")
+
     req.flash("notice", "You are not authorized to modify inventory.");
     return res.redirect("/account/login");
   }

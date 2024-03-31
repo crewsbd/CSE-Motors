@@ -33,9 +33,7 @@ async function getInventoryByClassificationId(classification_id) {
         WHERE i.classification_id = $1`,
       [classification_id]
     );
-    console.log("RETURNING ROWS!!!!!!!!");
-    console.dir(data);
-    console.dir(data.rows);
+ 
     return data.rows;
   } catch (error) {
     console.error("getclassificationsbyid error " + error);

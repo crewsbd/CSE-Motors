@@ -69,7 +69,6 @@ validate.updateRules = () => {
       .normalizeEmail() // refer to validator.js docs
       .withMessage("A valid email is required.")
       .custom(async (account_email, { req }) => { // Magic
-        console.log("REQ!!!!!!!!!!");
         console.dir(req.body);
         const emailExists = await accountModel.checkExistingEmail(
           account_email, req.body.old_email
