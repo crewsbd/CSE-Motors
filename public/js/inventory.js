@@ -23,6 +23,7 @@ function listChange() {
         })
         .catch(function (error) {
             console.log("There was a problem: ", error.message);
+            document.getElementById("inventoryDisplay").innerHTML = "No vehicles in this category"; // Wanted something here
         });
 }
 

@@ -6,7 +6,7 @@ const utilities = require("../utilities");
 const invValidate = require("../utilities/inventory-validation");
 
 
-// Route middleware
+// Route middleware for management functionality //TODO: Disable management screen
 router.use(["/add-classification", "/add-inventory", "/edit/:inventoryId", "/update", "/delete/:inventoryId", "/delete/",], utilities.checkLogin);
 router.use(["/add-classification", "/add-inventory", "/edit/:inventoryId", "/update", "/delete/:inventoryId", "/delete/",], utilities.checkAuthorizationManager);
 

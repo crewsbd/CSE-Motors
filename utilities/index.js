@@ -132,8 +132,8 @@ Util.buildItemListing = async function (data) {
 
 /**
  * Build an HTML select element with classification data
- * @param {*} classification_id
- * @returns
+ * @param {int} classification_id
+ * @returns {string}
  */
 
 Util.buildClassificationList = async function (classification_id = null) {
@@ -187,6 +187,12 @@ Util.checkJWTToken = (req, res, next) => {
     next();
   }
 };
+
+/**
+ * Function to update the browser cookie.
+ * @param {object} accountData 
+ * @param {import("express").Response} res 
+ */
 
 Util.updateCookie = (accountData, res) => {
   const accessToken = jwt.sign(
