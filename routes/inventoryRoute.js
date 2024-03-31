@@ -12,7 +12,7 @@ router.use(["/add-classification", "/add-inventory", "/edit/:inventoryId", "/upd
 
 // Misc. routes
 // Route to build inventory by classification view
-router.get("/", utilities.handleErrors(invController.buildManagementView));
+router.get("/", utilities.checkAuthorizationManager ,utilities.handleErrors(invController.buildManagementView)); // Had to put checkAuthorizationManager here too. Didn't work above
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildByInventoryId));
 
