@@ -11,7 +11,7 @@
 <form class="input-box" action="/account/register" method="post">
     <label>First name<input type="text" name="account_firstname" required autocomplete="given-name" value="<%= locals.account_firstname %>"></label>
     <label>Last name<input type="text" name="account_lastname" required autocomplete="family-name" value="<%= locals.account_last %>"></label>
-    <label>Email address<input type="email" name="account_email" required autocomplete="email username" value="<%= locals.account_email %>"></label>
+    <label>Email address<input type="email" name="account_email" required autocomplete="email" value="<%= locals.account_email %>"></label>
     <label>Password<input type="password" name="account_password" id="password" required autocomplete="new-password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{12,}$"><span class="reveal-button active" id="passwordHide">hide password</span></label>
     <span class="fine-print">Password must be 12 characters or longer, contain 1 capital letter, 1 number and 1 special character</span>
     <input type="submit" value="REGISTER">
