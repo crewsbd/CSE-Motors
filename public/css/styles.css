@@ -361,7 +361,7 @@ section.car-listing dl dt {
   border-radius: .5rem;
   box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.368);
 }
-.input-box button.reveal-button {
+.input-box .reveal-button {
   color: transparent; /* To make wave happy */
   position: absolute;
   bottom: 0;
@@ -373,11 +373,25 @@ section.car-listing dl dt {
   width: 2rem;
   border: 0;
 }
-.input-box button.reveal-button.active {
+.input-box .reveal-button.active {
   background-image: url("/images/site/eye_closed.svg");
 }
 .fine-print {
   font-size: .75em;
+}
+
+/* Inventory display */
+
+#inventoryDisplay tr td:nth-child(1) {
+  width: auto;
+}
+#inventoryDisplay tr td:nth-child(2) {
+  width: 75px;
+  text-align: end;
+}
+#inventoryDisplay tr td:nth-child(3) {
+  width: 75px;
+  text-align: end;
 }
 
 
