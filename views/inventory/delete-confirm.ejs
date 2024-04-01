@@ -1,0 +1,21 @@
+<h1><%- title %></h1>
+<%- messages() %> <%# WK4 TSK2.4 %>
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+  <form class="input-box" id="updateForm" action="/inv/delete" method="post">
+    <label>Make<input type="text" value="<%- locals.inv_make %>" placeholder="Ford" name="inv_make" minlength="2" maxlength="50" readonly></label>
+    <label>Model<input type="text" value="<%- locals.inv_model %>" placeholder="Mustang" name="inv_model" minlength="2" maxlength="50" readonly></label>
+    <label>Year<input type="number" value="<%- locals.inv_year %>" placeholder="2001" name="inv_year" min="1900" max="2030" readonly></label>
+    <label>Price<input type="number" value="<%- locals.inv_price %>" placeholder="15,000" name="inv_price" readonly></label>
+    <p>Confirm Deletion - The delete is permanent.</p>
+    <input type="submit" name="submit" value="Delete Vehicle">
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>> 
+  </form>
