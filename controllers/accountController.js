@@ -130,6 +130,7 @@ async function buildAccountManagementView(req, res) {
     title: "Account Management",
     nav,
     errors: null,
+    unread: 0,  // TODO: Populate this value
   });
   return; 
 }
@@ -265,6 +266,36 @@ async function updatePassword(req, res) {
       nav,
     });
   }
+}
+
+/* ****************************************
+ *  Deliver inbox view get
+ * *************************************** */
+async function buildInbox(req, res, next) {
+  let nav = await utilities.getNav();
+
+  const accountDetails = await accountModel.getAccountById(req.params.accountId);
+  // const {account_id, account_firstname, account_lastname, account_email} = accountDetails;
+  res.render("account/inbox", {
+    title: "Update",
+    nav,
+    errors: null,
+  });
+}
+
+/* ****************************************
+ *  Deliver message view get
+ * *************************************** */
+async function buildInbox(req, res, next) {
+  let nav = await utilities.getNav();
+
+  const accountDetails = await accountModel.getAccountById(req.params.accountId);
+  // const {account_id, account_firstname, account_lastname, account_email} = accountDetails;
+  res.render("account/inbox", {
+    title: "Update",
+    nav,
+    errors: null,
+  });
 }
 
 
