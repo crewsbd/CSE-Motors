@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const utilities = require("../utilities");
 const accountModel = require("../models/account-model");
+const messageModel = require("../models/message-model");
 
 
 /* ****************************************
@@ -121,16 +122,21 @@ async function accountLogin(req, res) {
   }
 }
 
-/* ****************************************
- *  Process account management get request
- * ************************************ */
+/**
+ * Process account management get request
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @param {import('express').NextFunction} next
+ */
 async function buildAccountManagementView(req, res) {
   let nav = await utilities.getNav();
+  const unread = await messageModel.getMessageCountById(res.locals.accountData.account_id);
+
   res.render("account/account-management", {
     title: "Account Management",
     nav,
     errors: null,
-    unread: 0,  // TODO: Populate this value
+    unread, 
   });
   return; 
 }
@@ -267,37 +273,6 @@ async function updatePassword(req, res) {
     });
   }
 }
-
-/* ****************************************
- *  Deliver inbox view get
- * *************************************** */
-async function buildInbox(req, res, next) {
-  let nav = await utilities.getNav();
-
-  const accountDetails = await accountModel.getAccountById(req.params.accountId);
-  // const {account_id, account_firstname, account_lastname, account_email} = accountDetails;
-  res.render("account/inbox", {
-    title: "Update",
-    nav,
-    errors: null,
-  });
-}
-
-/* ****************************************
- *  Deliver message view get
- * *************************************** */
-async function buildInbox(req, res, next) {
-  let nav = await utilities.getNav();
-
-  const accountDetails = await accountModel.getAccountById(req.params.accountId);
-  // const {account_id, account_firstname, account_lastname, account_email} = accountDetails;
-  res.render("account/inbox", {
-    title: "Update",
-    nav,
-    errors: null,
-  });
-}
-
 
 
 module.exports = { 

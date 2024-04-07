@@ -18,6 +18,7 @@ const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute.js");
 const accountRoute = require('./routes/accountRoute.js');
+const messageRoute = require('./routes/messageRoute.js');
 const intentionalErrorRoute = require("./routes/intentionalErrorRoute.js");
 const utilities = require("./utilities/index.js");
 const pool = require("./database");
@@ -74,6 +75,8 @@ app.get("/", utilities.handleErrors(baseController.buildHome));
 app.use("/inv", inventoryRoute);
 // Account routes
 app.use("/account", accountRoute);
+// Message routes
+app.use("/message", messageRoute);
 // Intentional error route. Used for testing
 app.use("/ierror", intentionalErrorRoute);
 // File Not Found Route - must be last route in list

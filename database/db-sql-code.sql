@@ -266,12 +266,12 @@ CREATE TABLE IF NOT EXISTS public.message (
 	message_read boolean DEFAULT false NOT NULL,
 	message_archived boolean DEFAULT false NOT NULL,
 	CONSTRAINT message_pkey PRIMARY KEY (message_id),
-	CONSTRAINT to_pkey FOREIGN KEY (message_to)
+	CONSTRAINT to_fkey FOREIGN KEY (message_to)
     REFERENCES public.account (account_id)
     MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE NO ACTION,
-	CONSTRAINT from_pkey FOREIGN KEY (message_from)
+	CONSTRAINT from_fkey FOREIGN KEY (message_from)
     REFERENCES public.account (account_id)
     MATCH SIMPLE
     ON UPDATE CASCADE
