@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const utilities = require("../utilities");
 const accountModel = require("../models/account-model");
+const messageModel = require("../models/message-model");
 
 
 /* ****************************************
@@ -121,15 +122,21 @@ async function accountLogin(req, res) {
   }
 }
 
-/* ****************************************
- *  Process account management get request
- * ************************************ */
+/**
+ * Process account management get request
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @param {import('express').NextFunction} next
+ */
 async function buildAccountManagementView(req, res) {
   let nav = await utilities.getNav();
+  const unread = await messageModel.getMessageCountById(res.locals.accountData.account_id);
+
   res.render("account/account-management", {
     title: "Account Management",
     nav,
     errors: null,
+    unread, 
   });
   return; 
 }
@@ -266,7 +273,6 @@ async function updatePassword(req, res) {
     });
   }
 }
-
 
 
 module.exports = { 

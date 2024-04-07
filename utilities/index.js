@@ -5,6 +5,19 @@ require("dotenv").config();
 
 const Util = {};
 
+/**
+* @typedef {Object} Message
+* @property {number} message_id
+* @property {string} message_subject
+* @property {string} message_body
+* @property {Date} message_created
+* @property {number} message_to
+* @property {number} message_from
+* @property {boolean} message_read
+* @property {boolean} message_archived
+*/
+
+
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -188,16 +201,14 @@ Util.checkJWTToken = (req, res, next) => {
 
 /**
  * Function to update the browser cookie.
- * @param {object} accountData 
- * @param {import("express").Response} res 
+ * @param {object} accountData
+ * @param {import("express").Response} res
  */
 
 Util.updateCookie = (accountData, res) => {
-  const accessToken = jwt.sign(
-    accountData,
-    process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: 3600 }
-  );
+  const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: 3600,
+  });
   if (process.env.NODE_ENV === "development") {
     res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
   } else {
@@ -207,8 +218,7 @@ Util.updateCookie = (accountData, res) => {
       maxAge: 3600 * 1000,
     });
   }
-}
-
+};
 
 /* ****************************************
  *  Check Login
@@ -236,20 +246,65 @@ Util.checkAuthorizationManager = (req, res, next) => {
           res.clearCookie("jwt");
           return res.redirect("/account/login");
         }
-        if(accountData.account_type == "Employee" || accountData.account_type == "Admin") {
+        if (
+          accountData.account_type == "Employee" ||
+          accountData.account_type == "Admin"
+        ) {
           next();
-        }
-        else {
+        } else {
           req.flash("notice", "You are not authorized to modify inventory.");
           return res.redirect("/account/login");
         }
       }
     );
   } else {
-
     req.flash("notice", "You are not authorized to modify inventory.");
     return res.redirect("/account/login");
   }
-}
+};
 
+
+/**
+ * Build an html table string from the message array
+ * @param {Array<Message>} messages 
+ * @returns 
+ */
+Util.buildInbox = (messages) => {
+  inboxList = `
+  <table>
+    <thead>
+      <tr>
+        <th>Received</th><th>Subject</th><th>From</th><th>Read</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+  messages.forEach((message) => {
+    inboxList += `
+    <tr>
+      <td>${message.message_created.toLocaleString()}</td>
+      <td><a href="/message/view/${message.message_id}">${message.message_subject}</a></td>
+      <td>${message.account_firstname} ${message.account_type}</td>
+      <td>${message.message_read ? "✓" : " "}</td>
+    </tr>`;
+  });
+
+  inboxList += `
+  </tbody>
+  </table> `;
+  return inboxList;
+};
+
+Util.buildRecipientList = (recipientData, preselected = null) => {
+  let list = `<select name="message_to" required>`;
+  list += '<option value="">Select a recipient</option>';
+
+  recipientData.forEach((recipient) => {
+    list += `<option ${preselected == recipient.account_id ? "selected" : ""} value="${recipient.account_id}">${recipient.account_firstname} ${recipient.account_lastname}</option>`
+  });
+  list += "</select>"
+
+  return list;
+
+};
 module.exports = Util;

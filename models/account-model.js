@@ -95,4 +95,15 @@ async function updatePassword(account_id, hashed_password) {
 
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword };
+async function getAccountList() {
+  const sql = "SELECT account_id, account_firstname, account_lastname FROM public.account";
+  try {
+    const response = await pool.query(sql);
+    return response.rows;
+  }
+  catch(error) {
+    return new Error("Failed to get account list");
+  }
+}
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword,getAccountList };
